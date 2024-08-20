@@ -44,7 +44,7 @@
 
         <div class="col-lg-12 portfolio-info">
           <br>
-          <h2 style="color:#12d640"><a href="https://blog.zyf.ninja/posts/minimax/minimax/" target="_blank" style="color:#12d640">AI Agent for "Breakthrough" (CS2109s - Introduction to AI and ML)</a></h2>
+          <h2 style="color:#12d640"><a href="https://github.com/Yufannnn/breakthrough-agent" target="_blank" style="color:#12d640">AI Agent for "Breakthrough" (CS2109s - Introduction to AI and ML)</a></h2>
 
           <ul>
             <li><strong>Year</strong>: 2023</li>
@@ -53,8 +53,18 @@
           </ul>
 
           <p>
-            This project involved designing an AI agent capable of strategic gameplay in the "Breakthrough" board game. The agent employed advanced algorithms, including iterative deepening minimax search, to evaluate and execute optimal moves, providing a competitive AI opponent.
+            This project focused on developing an AI agent capable of strategic gameplay in the "Breakthrough" board game. The AI leverages advanced algorithms, including the minimax search algorithm with alpha-beta pruning, to evaluate possible game states and determine the optimal move. By simulating both the AI's and the opponent's potential moves, the agent can anticipate and counter strategies, enhancing its competitiveness.
           </p>
+          <p>
+              To address the computational complexity inherent in the game, alpha-beta pruning was implemented, significantly reducing the number of nodes explored in the game tree. This optimization allows the AI to evaluate deeper levels of the game tree more efficiently, ensuring quicker and more informed decision-making.
+          </p>
+          <p>
+              Given the strict time constraint of 3 seconds per move, the AI employs iterative deepening search (IDS). This technique progressively increases the search depth within the allotted time, ensuring that the AI can make the best possible decision before time runs out. IDS strikes a balance between thoroughness and speed, adapting to the available computational resources.
+          </p>
+          <p>
+              The combination of minimax search, alpha-beta pruning, and iterative deepening allows the AI agent to provide a challenging and strategic opponent in "Breakthrough," making it a robust and effective player capable of competing against human and machine opponents alike.
+          </p>
+          
         </div>
 
       </div>
