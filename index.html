@@ -72,17 +72,34 @@
 
     <div class="container">
 
-      <h1><a href="index.html">Zhu Yufan</a></h1>
-      <h2 style="color:#fff">I'm <span class="typing" style="color:#12D640"></span></h2>
+      <h1 style="position:absolute;left:-9999px;"><a href="index.html">Zhu Yufan</a></h1>
+      <div class="terminal-hero" style="background:#0d1117;border:1px solid #12d640;border-radius:10px;max-width:680px;margin:0 auto 20px;padding:0;font-family:'JetBrains Mono','Courier New',monospace;text-align:left;box-shadow:0 0 40px rgba(18,214,64,0.25),0 0 1px rgba(18,214,64,0.5) inset;overflow:hidden;">
+        <div style="display:flex;align-items:center;padding:10px 14px;background:#161b22;border-bottom:1px solid #21262d;">
+          <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#ff5f56;margin-right:8px;"></span>
+          <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#ffbd2e;margin-right:8px;"></span>
+          <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#27c93f;margin-right:8px;"></span>
+          <span style="color:#7d8590;font-size:12px;margin-left:10px;">~/yufan — zsh</span>
+        </div>
+        <div style="padding:18px 22px;font-size:14px;line-height:1.8;">
+          <div><span style="color:#7d8590;">yufan@nus</span> <span style="color:#5578ff;">~</span> <span style="color:#12d640;">$</span> <span style="color:#fff;">whoami</span></div>
+          <div style="color:#fff;padding-left:0;">Zhu Yufan</div>
+          <div><span style="color:#7d8590;">yufan@nus</span> <span style="color:#5578ff;">~</span> <span style="color:#12d640;">$</span> <span style="color:#fff;">cat about.txt</span></div>
+          <div style="color:#fff;">PhD Student @ NUS &nbsp;·&nbsp; LLM Security &nbsp;·&nbsp; PPML</div>
+          <div><span style="color:#7d8590;">yufan@nus</span> <span style="color:#5578ff;">~</span> <span style="color:#12d640;">$</span> <span style="color:#fff;">role --now</span></div>
+          <div style="color:#fff;">I'm <span class="typing" style="color:#12D640;font-weight:600;"></span><span style="color:#12d640;animation:blink 1s step-end infinite;">_</span></div>
+        </div>
+      </div>
+      <style>@keyframes blink{50%{opacity:0;}}</style>
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="#header"> <span>Home</span></a></li>
+          <li><a href="#news"><span>News</span></a></li>
           <li><a href="#about"><span>About</span></a></li>
           <li><a href="#education"> <span>Education</span></a></li>
           <li><a href="#experience"> <span>Experience</span></a></li>
           <li><a href="#portfolio"> <span>Projects</span></a></li>
           <li><a href="#skills"> <span>Skills</span></a></li>
-          <li><a href="https://github.com/Yufannnn/Yufannnn/blob/main/Zhu_Yufan_Resume.pdf" target="_blank"> <span>Resume</span></a></li>
+          <li><a href="resume.html"> <span>Resume</span></a></li>
           <li><a href="#contacts"> <span>Contact</span></a></li>
         </ul>
       </nav><!-- .nav-menu -->
@@ -97,6 +114,27 @@
 
     </div>
   </header><!-- End Header -->
+
+  <!-- ======= News Section ======= -->
+  <section id="news" class="services" style="padding-top:40px;padding-bottom:10px;">
+    <div class="container">
+      <div class="section-title"><h2>News</h2></div>
+      <div class="row">
+        <div class="col-lg-12" data-aos="fade-up">
+          <div class="col-md-12 mt-2 mt-md-0 icon-box" style="padding:18px 22px;">
+            <ul style="text-align:left;color:#fff;list-style:none;padding-left:0;line-height:2;">
+              <li><span style="color:#12d640;font-weight:600;">[Apr 2026]</span> &nbsp; EncFormer preprint released on <a href="https://arxiv.org/abs/2604.09975" style="color:#12d640;">arXiv</a> — secure Transformer inference over homomorphically encrypted data.</li>
+              <li><span style="color:#12d640;font-weight:600;">[Aug 2025]</span> &nbsp; Started Year 1 of CS PhD at NUS School of Computing on the NUS Research Scholarship.</li>
+              <li><span style="color:#12d640;font-weight:600;">[May 2025]</span> &nbsp; Graduated B.Comp (Hons) in Computer Science from NUS.</li>
+              <li><span style="color:#12d640;font-weight:600;">[Aug 2024]</span> &nbsp; Presented our LLM symbolic-regression tool at <a href="https://ieeexplore.ieee.org/document/10605241" style="color:#12d640;">IEEE CAI 2024</a>.</li>
+              <li><span style="color:#12d640;font-weight:600;">[Jul 2024]</span> &nbsp; Joined the NTU × A*STAR quantum-enhanced ML project with Prof. Gu Mile and Dr. Jayne Thompson.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End News Section -->
 
   <!-- ======= About Section ======= -->
   <section id="about" class="about">
@@ -244,6 +282,11 @@
               <h4 style="text-align:left;"><a href="https://arxiv.org/abs/2604.09975" style="color:#12d640">EncFormer: Secure and Efficient Transformer Inference over Encrypted Data</a><br> </h4>
               <h5 style="text-align:left;"> arXiv preprint arXiv:2604.09975, 2026</h5>
               <p style="text-align:left;color:#fff"><em> Yufan Zhu, Chao Jin, Khin Mi Mi Aung, Xiaokui Xiao. </em></p>
+              <p style="text-align:left;">
+                <a href="https://arxiv.org/abs/2604.09975" target="_blank" style="display:inline-block;padding:4px 10px;margin-right:6px;border:1px solid #12d640;border-radius:4px;color:#12d640;text-decoration:none;font-size:13px;">arXiv</a>
+                <a href="https://arxiv.org/pdf/2604.09975" target="_blank" style="display:inline-block;padding:4px 10px;margin-right:6px;border:1px solid #12d640;border-radius:4px;color:#12d640;text-decoration:none;font-size:13px;">PDF</a>
+                <span style="display:inline-block;padding:4px 10px;margin-right:6px;border:1px solid #555;border-radius:4px;color:#888;font-size:13px;" title="Code release coming soon">Code · soon</span>
+              </p>
               <ul style="text-align:left;">
                 <li>We present EncFormer, a system for running Transformer inference directly over homomorphically encrypted data, enabling privacy-preserving LLM serving where neither model weights nor user inputs need to leave the encrypted domain. EncFormer redesigns attention, layer-norm, and non-linear activations to be friendly to fully homomorphic encryption (FHE), and introduces optimizations that materially cut latency over prior secure-inference baselines while preserving model accuracy.</li>
               </ul>
@@ -253,6 +296,10 @@
               <h4 style="text-align:left;"><a href="https://ieeexplore.ieee.org/document/10605241" style="color:#12d640">A Personalized Learning Tool for Physics Undergraduate Students Built On a Large Language Model for Symbolic Regression</a><br> </h4>
               <h5 style="text-align:left;"> In Proceedings of the 2024 IEEE Conference on Artificial Intelligence (CAI 2024)</h5>
               <p style="text-align:left;color:#fff"><em> Yufan Zhu, Zi-Yu Khoo, Jonathan Sze Choong Low, Stephane Bressan. </em></p>
+              <p style="text-align:left;">
+                <a href="https://ieeexplore.ieee.org/document/10605241" target="_blank" style="display:inline-block;padding:4px 10px;margin-right:6px;border:1px solid #12d640;border-radius:4px;color:#12d640;text-decoration:none;font-size:13px;">IEEE</a>
+                <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10605241" target="_blank" style="display:inline-block;padding:4px 10px;margin-right:6px;border:1px solid #12d640;border-radius:4px;color:#12d640;text-decoration:none;font-size:13px;">PDF</a>
+              </p>
               <ul style="text-align:left;">
                 <li>Interleaved practice enhances the memory and problem-solving ability of students in undergraduate courses. We introduce a personalized learning tool built on a Large Language Model (LLM) that can provide immediate and personalized attention to students as they complete homework containing problems interleaved from undergraduate physics courses. Our tool leverages the dimensional analysis method, enhancing students’ qualitative thinking and problem-solving skills for complex phenomena. Our approach combines LLMs for symbolic regression with dimensional analysis via prompt engineering and offers students a unique perspective to comprehend relationships between physics variables. This fosters a broader and more versatile understanding of physics and mathematical principles and complements a conventional undergraduate physics education that relies on interpreting and applying established equations within specific contexts. We test our personalized learning tool on the equations from Feynman’s lectures on physics. Our tool can correctly identify relationships between physics variables for most equations, underscoring its value as a complementary personalized learning tool for undergraduate physics students.</li>
               </ul>
