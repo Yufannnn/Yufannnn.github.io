@@ -72,7 +72,7 @@
 
     <div class="container">
 
-      <h1 style="position:absolute;left:-9999px;"><a href="index.html">Zhu Yufan</a></h1>
+      <h1><a href="index.html">Zhu Yufan</a></h1>
       <div class="terminal-hero" style="background:#0d1117;border:1px solid #12d640;border-radius:10px;max-width:680px;margin:0 auto 20px;padding:0;font-family:'JetBrains Mono','Courier New',monospace;text-align:left;box-shadow:0 0 40px rgba(18,214,64,0.25),0 0 1px rgba(18,214,64,0.5) inset;overflow:hidden;">
         <div style="display:flex;align-items:center;padding:10px 14px;background:#161b22;border-bottom:1px solid #21262d;">
           <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#ff5f56;margin-right:8px;"></span>
@@ -89,7 +89,14 @@
           <div style="color:#fff;">I'm <span class="typing" style="color:#12D640;font-weight:600;"></span><span style="color:#12d640;animation:blink 1s step-end infinite;">_</span></div>
         </div>
       </div>
-      <style>@keyframes blink{50%{opacity:0;}}</style>
+      <style>
+        @keyframes blink{50%{opacity:0;}}
+        /* Hide the plain H1 while the hero is expanded — terminal block IS the title */
+        #header:not(.header-top) h1 { position: absolute; left: -9999px; }
+        /* When the header collapses to the sticky nav, hide the terminal & show the H1 */
+        #header.header-top .terminal-hero { display: none !important; }
+        #header.header-top h1 { position: static; }
+      </style>
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="#header"> <span>Home</span></a></li>
