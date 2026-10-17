@@ -1,4 +1,4 @@
-.section-heading-row{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:2px solid var(--navy);margin-bottom:24px;padding-bottom:12px}
+.section-heading-row{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:2px solid var(--navy);margin-bottom:18px;padding-bottom:9px}
 .section-heading-row .section-title{border:0;padding:0;margin:0}
 .desk-clock{display:flex;gap:9px;align-items:baseline;color:var(--muted);font-size:.72rem;white-space:nowrap}
 .desk-clock time{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86rem;font-variant-numeric:tabular-nums;color:var(--navy)}

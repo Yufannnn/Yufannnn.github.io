@@ -27,7 +27,7 @@ body {
   color: var(--ink);
   font-family: var(--sans);
   font-size: 17px;
-  line-height: 1.65;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -136,7 +136,7 @@ p {
   display: grid;
   grid-template-columns: 225px minmax(0, 1fr);
   gap: clamp(48px, 7vw, 84px);
-  padding: 58px 0 88px;
+  padding: 40px 0 52px;
 }
 
 .profile-card {
@@ -201,7 +201,7 @@ main {
 }
 
 .intro {
-  padding-bottom: 52px;
+  padding-bottom: 32px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -215,13 +215,14 @@ main {
 }
 
 .intro-title {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: var(--muted);
   font-size: 1.05rem;
 }
 
 .chinese-name {
   display: inline-block;
+  font-family: "FangSong", "仿宋", "STFangsong", fangsong, serif;
   font-size: 0.65em;
   font-weight: 400;
   letter-spacing: 0;
@@ -231,17 +232,17 @@ main {
 .bio {
   max-width: 760px;
   font-family: Georgia, serif;
-  font-size: 1.08rem;
-  line-height: 1.75;
+  font-size: 1.04rem;
+  line-height: 1.5;
 }
 
 .bio p {
-  margin-bottom: 17px;
+  margin-bottom: 12px;
 }
 
 .interest-block {
-  margin-top: 30px;
-  padding: 20px 22px;
+  margin-top: 20px;
+  padding: 14px 18px;
   border-left: 3px solid var(--navy);
   background: var(--soft);
 }
@@ -261,12 +262,12 @@ main {
 }
 
 .content-section {
-  padding-top: 58px;
+  padding-top: 36px;
 }
 
 .section-title {
-  margin-bottom: 28px;
-  padding-bottom: 11px;
+  margin-bottom: 18px;
+  padding-bottom: 9px;
   border-bottom: 2px solid var(--navy);
   font-family: var(--serif);
   font-size: 1.55rem;
@@ -277,8 +278,8 @@ main {
   display: grid;
   grid-template-columns: 74px minmax(0, 1fr);
   gap: 20px;
-  padding: 0 0 34px;
-  margin-bottom: 34px;
+  padding: 0 0 22px;
+  margin-bottom: 22px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -303,10 +304,10 @@ main {
 }
 
 .paper h3 {
-  margin-bottom: 9px;
+  margin-bottom: 7px;
   font-family: var(--serif);
   font-size: 1.13rem;
-  line-height: 1.48;
+  line-height: 1.35;
 }
 
 .authors {
@@ -351,8 +352,8 @@ main {
 }
 
 .compact-paper {
-  padding-bottom: 27px;
-  margin-bottom: 27px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
 }
 
 .timeline-list {
@@ -363,7 +364,7 @@ main {
   display: grid;
   grid-template-columns: 112px minmax(0, 1fr);
   gap: 24px;
-  padding: 25px 0;
+  padding: 16px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -408,7 +409,7 @@ main {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 24px 0 30px;
+  padding: 18px 0 22px;
 }
 
 .site-footer p {
@@ -486,7 +487,7 @@ main {
 
   .page-shell {
     display: block;
-    padding: 34px 0 66px;
+    padding: 24px 0 44px;
   }
 
   .profile-card {
@@ -494,8 +495,8 @@ main {
     display: grid;
     grid-template-columns: 120px minmax(0, 1fr);
     column-gap: 20px;
-    margin-bottom: 42px;
-    padding-bottom: 34px;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
     border-bottom: 1px solid var(--line);
   }
 
@@ -544,7 +545,7 @@ main {
   }
 
   .content-section {
-    padding-top: 48px;
+    padding-top: 32px;
   }
 
   .paper {
