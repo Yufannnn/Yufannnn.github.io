@@ -220,6 +220,14 @@ main {
   font-size: 1.05rem;
 }
 
+.chinese-name {
+  display: inline-block;
+  font-size: 0.65em;
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
 .bio {
   max-width: 760px;
   font-family: Georgia, serif;
