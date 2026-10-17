@@ -1,0 +1,9 @@
+{
+  "endpoint": "https://yufan-portfolio-visitors.encformer-visitors.workers.dev",
+  "hostname": "yufannnn.github.io",
+  "paths": [
+    "/",
+    "/index.html",
+    "/resume.html"
+  ]
+}

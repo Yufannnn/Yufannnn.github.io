@@ -1,0 +1,17 @@
+name = "yufan-portfolio-visitors"
+main = "index.mjs"
+compatibility_date = "2026-10-17"
+account_id = "d9f3a3a3c9251aa3bf356ae22a843470"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGIN = "https://yufannnn.github.io"
+COLLECTED_SINCE = "2026-10-17"
+
+[observability]
+enabled = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "yufan-portfolio-visitors"
+database_id = "acc1361a-5dae-426a-a1f5-8c85f3d265dd"

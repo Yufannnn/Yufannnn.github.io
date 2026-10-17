@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&amp;family=Source+Sans+3:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/research-desk.css">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yufannnn.github.io/">
@@ -50,6 +51,7 @@
         <a href="#publications">Publications</a>
         <a href="#manuscripts">Manuscripts</a>
         <a href="#service">Service</a>
+        <a href="#research-desk">Desk</a>
         <a href="resume.html">CV</a>
       </nav>
     </div>
@@ -147,6 +149,7 @@
             <p class="paper-note">In Proceedings of the 2024 IEEE Conference on Artificial Intelligence.</p>
             <div class="paper-links">
               <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=10605241" target="_blank" rel="noreferrer">PDF</a>
+              <a href="https://arxiv.org/abs/2407.00065" target="_blank" rel="noreferrer">arXiv</a>
               <a href="https://ieeexplore.ieee.org/document/10605241" target="_blank" rel="noreferrer">Publisher</a>
             </div>
           </div>
@@ -208,6 +211,31 @@
           </article>
         </div>
       </section>
+      <section class="content-section" id="research-desk" aria-labelledby="desk-heading">
+        <div class="section-heading-row">
+          <h2 class="section-title" id="desk-heading">Research desk</h2>
+          <div class="desk-clock"><span>Singapore · UTC+8</span><time id="singapore-clock">—</time></div>
+        </div>
+        <div class="activity-panel">
+          <div class="panel-heading"><h3>Building, in public and private</h3><a href="https://github.com/Yufannnn" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+          <div id="research-calendar" class="research-calendar" role="img" aria-label="Loading authored commit activity"></div>
+          <div class="activity-meta"><p><strong id="commit-total">—</strong> authored commits <span class="meta-separator">/</span> <strong id="active-repos">—</strong> active repositories</p><p id="activity-updated">Past 365 days</p></div>
+        </div>
+        <p class="desk-note">Default branches, public and private. Duplicate commits count once.</p>
+      </section>
+
+      <section class="content-section" id="visitor-atlas" aria-labelledby="atlas-heading">
+        <div class="section-heading-row"><h2 class="section-title" id="atlas-heading">Visitor Atlas</h2><span class="atlas-status" id="atlas-status" role="status">Connecting</span></div>
+        <div class="atlas-panel">
+          <div class="atlas-map" aria-label="Country-level page views"></div>
+          <div class="atlas-summary">
+            <dl class="atlas-totals"><div><dt>Page views</dt><dd data-atlas-stat="pageViews">—</dd></div><div><dt>Countries</dt><dd data-atlas-stat="countries">—</dd></div></dl>
+            <div class="atlas-country-heading">Top countries</div>
+            <ol id="atlas-countries" class="atlas-countries"><li>Waiting for the first visits.</li></ol>
+          </div>
+        </div>
+        <div class="atlas-footnote"><span>Country-level views · no cookies or visitor identifiers</span><time id="atlas-updated"></time></div>
+      </section>
     </main>
   </div>
 
@@ -218,6 +246,14 @@
     </div>
   </footer>
 
+  <dialog id="citation-dialog" class="citation-dialog" aria-labelledby="citation-heading">
+    <div class="citation-heading"><h2 id="citation-heading">Cite this paper</h2><button type="button" data-close-citation aria-label="Close citation">×</button></div>
+    <pre><code id="citation-text"></code></pre>
+    <div class="citation-actions"><button type="button" id="copy-citation">Copy BibTeX</button><a id="download-citation" download>Download .bib</a><span id="citation-status" role="status"></span></div>
+  </dialog>
+
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/research-desk.js" defer></script>
+  <script src="assets/js/visitor-atlas.js" defer></script>
 </body>
 </html>
