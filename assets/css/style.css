@@ -328,6 +328,13 @@ main {
   font-style: italic;
 }
 
+.paper-publication {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
 .paper-links {
   display: flex;
   flex-wrap: wrap;
@@ -391,6 +398,29 @@ main {
   margin-bottom: 4px;
   color: var(--ink);
   font-weight: 600;
+}
+
+.education-list article {
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 18px;
+  padding: 14px 0;
+}
+
+.education-details {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 3px 12px;
+  margin: 8px 0 0;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.education-details dt {
+  color: var(--muted);
+}
+
+.education-details dd {
+  margin: 0;
 }
 
 .service-list h3 {
