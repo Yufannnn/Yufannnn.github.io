@@ -185,10 +185,11 @@ p {
 }
 
 .profile-link-icon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  fill: currentColor;
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  object-fit: contain;
 }
 
 main {

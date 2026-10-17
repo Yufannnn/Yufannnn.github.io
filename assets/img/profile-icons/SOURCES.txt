@@ -1,0 +1,9 @@
+Profile-link icons
+
+NUS crest: https://www.comp.nus.edu.sg/wp-content/uploads/2023/09/cropped-favicon-192x192.png
+A*STAR mark: https://www.a-star.edu.sg/api/media/867ab78f-c433-4489-9de0-51f3937f384c/favicon.ico
+A*STAR ICO converted to PNG without altering the artwork.
+Hugging Face: https://huggingface.co/front/assets/huggingface_logo-noborder.svg
+Google Scholar: Simple Icons (CC0), https://github.com/simple-icons/simple-icons
+LinkedIn, GitHub and CV: existing vendored Remix Icon, assets/vendor/remixicon/remixicon.symbol.svg
+Institutional and service logos belong to their respective owners.
