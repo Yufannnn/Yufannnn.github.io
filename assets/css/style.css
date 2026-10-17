@@ -5,6 +5,7 @@
   --muted: #5f6973;
   --line: #dce2e7;
   --soft: #f4f7f9;
+  --banner: #eaf1f5;
   --white: #ffffff;
   --serif: "Libre Baskerville", Georgia, serif;
   --sans: "Source Sans 3", Arial, sans-serif;
@@ -76,8 +77,7 @@ p {
   top: 0;
   z-index: 20;
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
+  background: var(--banner);
 }
 
 .header-inner {
@@ -145,12 +145,34 @@ p {
   align-self: start;
 }
 
-.profile-photo {
+.profile-portrait {
+  position: relative;
   width: 190px;
-  margin-bottom: 22px;
+  margin-bottom: 36px;
+  align-self: start;
+}
+
+.profile-photo {
+  width: 100%;
   border: 1px solid var(--line);
   border-radius: 3px;
   background: var(--soft);
+}
+
+.school-mark {
+  position: absolute;
+  right: 10px;
+  bottom: -12px;
+  left: 10px;
+  padding: 10px 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--white);
+  box-shadow: 0 3px 10px #163f6310;
+}
+
+.school-mark img {
+  width: 100%;
 }
 
 .profile-meta {
@@ -385,7 +407,7 @@ main {
 
 .site-footer {
   border-top: 1px solid var(--line);
-  background: var(--soft);
+  background: var(--banner);
 }
 
 .site-footer > div {
@@ -413,7 +435,7 @@ main {
     gap: 40px;
   }
 
-  .profile-photo {
+  .profile-portrait {
     width: 165px;
   }
 }
@@ -453,7 +475,7 @@ main {
     gap: 0;
     padding: 8px 16px 14px;
     border-bottom: 1px solid var(--line);
-    background: var(--white);
+    background: var(--banner);
   }
 
   .site-nav.is-open {
@@ -485,10 +507,16 @@ main {
     border-bottom: 1px solid var(--line);
   }
 
-  .profile-photo {
+  .profile-portrait {
     grid-row: 1 / span 2;
     width: 120px;
     margin-bottom: 0;
+  }
+
+  .school-mark {
+    right: 5px;
+    left: 5px;
+    padding: 7px 5px;
   }
 
   .profile-meta {
@@ -554,7 +582,7 @@ main {
     column-gap: 16px;
   }
 
-  .profile-photo {
+  .profile-portrait {
     width: 100px;
   }
 
