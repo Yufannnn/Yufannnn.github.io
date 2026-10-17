@@ -146,9 +146,8 @@ p {
 }
 
 .profile-portrait {
-  position: relative;
   width: 190px;
-  margin-bottom: 36px;
+  margin-bottom: 22px;
   align-self: start;
 }
 
@@ -160,15 +159,9 @@ p {
 }
 
 .school-mark {
-  position: absolute;
-  right: 10px;
-  bottom: -12px;
-  left: 10px;
-  padding: 10px 8px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background: var(--white);
-  box-shadow: 0 3px 10px #163f6310;
+  display: block;
+  margin-top: 12px;
+  padding: 0 6px;
 }
 
 .school-mark img {
@@ -210,15 +203,6 @@ main {
 .intro {
   padding-bottom: 52px;
   border-bottom: 1px solid var(--line);
-}
-
-.kicker {
-  margin-bottom: 10px;
-  color: var(--navy);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .intro h1 {
@@ -514,9 +498,8 @@ main {
   }
 
   .school-mark {
-    right: 5px;
-    left: 5px;
-    padding: 7px 5px;
+    margin-top: 10px;
+    padding: 0;
   }
 
   .profile-meta {
