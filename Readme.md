@@ -1,6 +1,6 @@
-# Zhu Yufan — Academic Website
+# Yufan Zhu — Academic Website
 
-Personal academic website for Zhu Yufan, a Computer Science PhD student at the National University of Singapore researching secure and privacy-preserving machine learning systems.
+Personal academic website for Yufan Zhu, a Computer Science PhD student at the National University of Singapore researching secure and privacy-preserving machine learning systems.
 
 Live site: [yufannnn.github.io](https://yufannnn.github.io/)
 
