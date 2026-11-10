@@ -45,9 +45,18 @@ export default {
         return json({counted: true}, 201, origin);
       }
       if (url.pathname === '/stats' && request.method === 'GET') {
-        const {results = []} = await env.DB.prepare('SELECT country, SUM(views) AS views FROM daily_page_views GROUP BY country').all();
+        const generatedAt = new Date();
+        const since = new Date(generatedAt);
+        since.setUTCDate(since.getUTCDate() - 6);
+        const recentSince = since.toISOString().slice(0, 10);
+        const today = generatedAt.toISOString().slice(0, 10);
+        const {results = []} = await env.DB.prepare('SELECT country, SUM(views) AS views, MAX(day) AS lastSeen FROM daily_page_views GROUP BY country').all();
         const countries = results.filter(row => /^[A-Z]{2}$/.test(row.country) && !['ZZ', 'XX'].includes(row.country));
-        return json({status: 'ok', generatedAt: new Date().toISOString(), collectedSince: env.COLLECTED_SINCE,
+        const recentCountries = countries.filter(row => row.lastSeen >= recentSince && row.lastSeen <= today)
+          .map(row => ({code: row.country, lastSeen: row.lastSeen}))
+          .sort((a, b) => b.lastSeen.localeCompare(a.lastSeen) || a.code.localeCompare(b.code));
+        return json({status: 'ok', generatedAt: generatedAt.toISOString(), collectedSince: env.COLLECTED_SINCE,
+          recentSince, recentCountries,
           pageViews: results.reduce((sum, row) => sum + Number(row.views), 0), countries: countries.length,
           countryVisits: countries.map(row => ({code: row.country, name: row.country, visits: Number(row.views)})).sort((a, b) => b.visits - a.visits)});
       }

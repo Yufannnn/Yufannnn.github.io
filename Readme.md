@@ -30,6 +30,12 @@ are excluded. Country locations are approximate; these are page views, not uniqu
 people. Map outlines are from Natural Earth (public domain), reused from the
 QuasiLeak-Bench Atlas.
 
+The map shows countries active in the past seven UTC calendar days with equal
+highlighting. The country list shows the five most recently active countries,
+with last-seen dates instead of visit counts. Countries last seen on the same
+UTC day are tied and ordered alphabetically by country code. Overall page-view
+and country totals remain cumulative. No finer-grained visit timestamps are stored.
+
 ```sh
 node --test tools/visitor-atlas/worker.test.mjs
 npx wrangler@4 deploy --config tools/visitor-atlas/wrangler.toml

@@ -9,8 +9,14 @@ function database() {
     async run() { const key = JSON.stringify(this.record); records.set(key, (records.get(key) || 0) + 1); },
     async all() {
       const countries = new Map();
-      for (const [key, views] of records) { const {country} = JSON.parse(key); countries.set(country, (countries.get(country) || 0) + views); }
-      return {results: [...countries].map(([country, views]) => ({country, views}))};
+      for (const [key, views] of records) {
+        const {country, day} = JSON.parse(key);
+        const total = countries.get(country) || {country, views: 0, lastSeen: ''};
+        total.views += views;
+        if (day > total.lastSeen) total.lastSeen = day;
+        countries.set(country, total);
+      }
+      return {results: [...countries.values()]};
     }
   }; }};
 }
@@ -31,6 +37,7 @@ test('portfolio and CV views aggregate without identifiers or benchmark traffic'
   assert.equal(result.pageViews, 2);
   assert.equal(result.countries, 2);
   assert.deepEqual(result.countryVisits.map(x => x.code).sort(), ['SG', 'US']);
+  assert.deepEqual(result.recentCountries.map(x => x.code), ['SG', 'US']);
   assert.equal('visitors' in result, false);
   assert.equal('ip' in result, false);
 });
@@ -48,4 +55,39 @@ test('unknown locations count as views without inventing a country', async () =>
   await worker.fetch(visit('/', 'ZZ'), env);
   assert.equal((await stats(env)).pageViews, 1);
   assert.equal((await stats(env)).countries, 0);
+  assert.deepEqual((await stats(env)).recentCountries, []);
+});
+
+test('recent countries use UTC recency, not cumulative visit counts', async t => {
+  t.mock.timers.enable({apis: ['Date'], now: Date.parse('2026-11-10T00:05:00Z')});
+  const env = {DB: database()};
+  const seed = (country, day, views) => env.DB.records.set(JSON.stringify({day, path: '/', country}), views);
+  seed('SG', '2026-11-04', 10000); // Old volume must not determine the ordering.
+  seed('SG', '2026-10-20', 5000);
+  seed('US', '2026-11-10', 1);
+  seed('JP', '2026-11-09', 1);
+  seed('CA', '2026-11-09', 2); // Same-day ties use country code, not volume.
+  seed('DE', '2026-11-03', 999); // Outside the seven calendar-day window.
+  seed('ZZ', '2026-11-10', 3);
+  const result = await stats(env);
+  assert.equal(result.recentSince, '2026-11-04');
+  assert.deepEqual(result.recentCountries, [
+    {code: 'US', lastSeen: '2026-11-10'},
+    {code: 'CA', lastSeen: '2026-11-09'},
+    {code: 'JP', lastSeen: '2026-11-09'},
+    {code: 'SG', lastSeen: '2026-11-04'}
+  ]);
+  assert.equal(result.pageViews, 16006);
+  assert.equal(result.countries, 5);
+  assert.ok(result.recentCountries.every(row => !('visits' in row)));
+});
+
+test('a quiet week has no recent countries but preserves overall totals', async t => {
+  t.mock.timers.enable({apis: ['Date'], now: Date.parse('2026-11-10T23:59:59Z')});
+  const env = {DB: database()};
+  env.DB.records.set(JSON.stringify({day: '2026-11-03', path: '/', country: 'SG'}), 500);
+  const result = await stats(env);
+  assert.deepEqual(result.recentCountries, []);
+  assert.equal(result.pageViews, 500);
+  assert.equal(result.countries, 1);
 });
