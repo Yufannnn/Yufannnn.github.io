@@ -19,6 +19,26 @@
       svg.removeAttribute('aria-labelledby');
       const description = svg.querySelector('desc');
       if (description) description.textContent = 'Shading and dots show all countries and territories with recorded page views, without visit counts or dates. Dot positions are approximate.';
+      const land = svg.querySelector('g');
+      land.setAttribute('class','atlas-land');
+      const grid = document.createElementNS('http://www.w3.org/2000/svg','g');
+      grid.setAttribute('class','atlas-graticule');
+      grid.setAttribute('aria-hidden','true');
+      for (const longitude of [-120,-60,0,60,120]) {
+        const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+        const x = (longitude + 180) * 2.5;
+        line.setAttribute('x1',x); line.setAttribute('x2',x);
+        line.setAttribute('y1',25); line.setAttribute('y2',365);
+        grid.append(line);
+      }
+      for (const latitude of [-60,-30,0,30,60]) {
+        const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+        const y = 212.5 - latitude * 2.5;
+        line.setAttribute('x1',15); line.setAttribute('x2',885);
+        line.setAttribute('y1',y); line.setAttribute('y2',y);
+        grid.append(line);
+      }
+      svg.insertBefore(grid,land);
       atlas.querySelector('.atlas-map').replaceChildren(document.importNode(svg,true));
       return atlas.querySelector('.atlas-map svg');
     });
@@ -41,8 +61,6 @@
       path.dataset.countryName = name;
       if (visited.has(normalize(name)) || visited.has(normalize(aliases[name] || ''))) {
         path.dataset.visited = 'true';
-        path.style.fill = 'var(--atlas-accent)';
-        path.style.fillOpacity = '0.7';
         title.textContent = name + ': recorded page views';
       } else {
         delete path.dataset.visited; path.style.fill = ''; path.style.fillOpacity = ''; title.textContent = name;
@@ -74,7 +92,7 @@
       const marker=document.createElementNS('http://www.w3.org/2000/svg','g');
       marker.dataset.countryCode=country.code;
       const title=document.createElementNS('http://www.w3.org/2000/svg','title');
-      title.textContent=displayName+': recorded page views (approximate location)';
+      title.textContent=displayName;
       marker.append(title);
       for(const [radius,style] of [[9,'atlas-marker-halo'],[4.5,'atlas-marker']]){
         const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
