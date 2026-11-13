@@ -30,11 +30,14 @@ are excluded. Country locations are approximate; these are page views, not uniqu
 people. Map outlines are from Natural Earth (public domain), reused from the
 QuasiLeak-Bench Atlas.
 
-The map shows countries active in the past seven UTC calendar days with equal
-highlighting. The country list shows the five most recently active countries,
-with last-seen dates instead of visit counts. Countries last seen on the same
-UTC day are tied and ordered alphabetically by country code. Overall page-view
-and country totals remain cumulative. No finer-grained visit timestamps are stored.
+The map marks every country or territory with recorded page views, with equal
+highlighting regardless of visit volume or recency. Explicit map anchors cover
+Singapore and Hong Kong, which are absent from the simplified country outlines.
+The sidebar lists the five most recently active countries from the past seven
+UTC calendar days, without visit counts or dates. Countries last seen on the
+same UTC day are tied and ordered alphabetically by country code. Overall
+page-view and country totals remain cumulative. No finer-grained visit
+timestamps are stored.
 
 ```sh
 node --test tools/visitor-atlas/worker.test.mjs

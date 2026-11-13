@@ -4,19 +4,21 @@
   const base = new URL('.', document.currentScript.src);
   const atlas = document.getElementById('visitor-atlas');
   let map;
-  const seenDate = day => new Date(day+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'});
-  const aliases = {'United States of America':'US','United Kingdom':'GB','Russia':'RU','S. Korea':'KR','N. Korea':'KP','Czechia':'CZ','Dem. Rep. Congo':'CD','Congo':'CG','Central African Rep.':'CF','Eq. Guinea':'GQ','S. Sudan':'SS','Dominican Rep.':'DO','Bosnia and Herz.':'BA','Solomon Is.':'SB','Falkland Is.':'FK','eSwatini':'SZ','W. Sahara':'EH','Taiwan':'TW','Palestine':'PS','Kosovo':'XK'};
+  const aliases = {'United States of America':'US','United Kingdom':'GB','Russia':'RU','S. Korea':'KR','South Korea':'KR','N. Korea':'KP','North Korea':'KP','Vietnam':'VN','Macedonia':'MK','Czechia':'CZ','Dem. Rep. Congo':'CD','Congo':'CG','Central African Rep.':'CF','Eq. Guinea':'GQ','S. Sudan':'SS','Dominican Rep.':'DO','Bosnia and Herz.':'BA','Solomon Is.':'SB','Falkland Is.':'FK','eSwatini':'SZ','W. Sahara':'EH','Taiwan':'TW','Palestine':'PS','Kosovo':'XK'};
+  // Approximate locations for recorded regions absent from the low-resolution outlines.
+  // Equirectangular map: x = (longitude + 180) * 2.5; y = 212.5 - latitude * 2.5.
+  const smallLocations = {SG: [709.6,209.1], HK: [735.4,156.7]};
   async function paintCountries(countries) {
     if (!atlas || !Array.isArray(countries)) return;
     if (!map) map = fetch(new URL('../img/visitor-atlas.svg',base)).then(r=>r.ok?r.text():Promise.reject()).then(source=>{
       const svg = new DOMParser().parseFromString(source,'image/svg+xml').documentElement;
       if (svg.localName !== 'svg') throw Error('Invalid atlas map');
-      svg.setAttribute('aria-label','Countries seen in the last 7 UTC days. Dots mark approximate country locations, not visitor addresses.');
+      svg.setAttribute('aria-label','All countries and territories with recorded page views. Dots mark approximate locations, not visitor addresses.');
       svg.style.width = '100%';
       svg.style.height = 'auto';
       svg.removeAttribute('aria-labelledby');
       const description = svg.querySelector('desc');
-      if (description) description.textContent = 'Shading and dots show countries seen in the last 7 UTC days, without visit counts. Dot positions are approximate.';
+      if (description) description.textContent = 'Shading and dots show all countries and territories with recorded page views, without visit counts or dates. Dot positions are approximate.';
       atlas.querySelector('.atlas-map').replaceChildren(document.importNode(svg,true));
       return atlas.querySelector('.atlas-map svg');
     });
@@ -24,36 +26,34 @@
     svg.querySelector('.atlas-markers')?.remove();
     const markers = document.createElementNS('http://www.w3.org/2000/svg','g');
     markers.setAttribute('class','atlas-markers');
-    const lastSeen = new Map();
+    const visited = new Set();
     const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
     const names = typeof Intl.DisplayNames === 'function' ? new Intl.DisplayNames(['en'],{type:'region'}) : null;
     for (const country of countries) {
-      if (!/^[A-Z]{2}$/.test(country.code) || !/^\d{4}-\d{2}-\d{2}$/.test(country.lastSeen)) continue;
-      lastSeen.set(normalize(country.code),country.lastSeen);
-      if (names) lastSeen.set(normalize(names.of(country.code)),country.lastSeen);
+      if (!/^[A-Z]{2}$/.test(country.code) || ['ZZ','XX'].includes(country.code)) continue;
+      visited.add(normalize(country.code));
+      if (names) visited.add(normalize(names.of(country.code)));
     }
     for (const path of svg.querySelectorAll('path')) {
       const title = path.querySelector('title');
       if (!title) continue;
       const name = path.dataset.countryName || title.textContent;
       path.dataset.countryName = name;
-      const day = lastSeen.get(normalize(name)) || lastSeen.get(normalize(aliases[name] || ''));
-      if (day) {
-        path.dataset.lastSeen = day;
+      if (visited.has(normalize(name)) || visited.has(normalize(aliases[name] || ''))) {
+        path.dataset.visited = 'true';
         path.style.fill = 'var(--atlas-accent)';
         path.style.fillOpacity = '0.7';
-        title.textContent = name + ': seen ' + seenDate(day) + ' (UTC)';
+        title.textContent = name + ': recorded page views';
       } else {
-        delete path.dataset.lastSeen; path.style.fill = ''; path.style.fillOpacity = ''; title.textContent = name;
+        delete path.dataset.visited; path.style.fill = ''; path.style.fillOpacity = ''; title.textContent = name;
       }
     }
-    // This low-resolution outline omits Singapore and other small states.
-    // Singapore is anchored on the map's equirectangular projection; other
-    // countries use the centre of their largest polygon, not a visitor location.
+    // Omitted regions use explicit anchors; other countries use the centre
+    // of their largest polygon, not a visitor location.
     const paths = [...svg.querySelectorAll('path')];
     for (const country of countries) {
-      if (!/^[A-Z]{2}$/.test(country.code) || !/^\d{4}-\d{2}-\d{2}$/.test(country.lastSeen)) continue;
-      let point = country.code === 'SG' ? [709.6,209.1] : null;
+      if (!/^[A-Z]{2}$/.test(country.code) || ['ZZ','XX'].includes(country.code)) continue;
+      let point = smallLocations[country.code] || null;
       const displayName = names ? names.of(country.code) : country.code;
       if (!point) {
         const path = paths.find(path => {
@@ -72,8 +72,9 @@
       }
       if (!point) continue;
       const marker=document.createElementNS('http://www.w3.org/2000/svg','g');
+      marker.dataset.countryCode=country.code;
       const title=document.createElementNS('http://www.w3.org/2000/svg','title');
-      title.textContent=displayName+': seen '+seenDate(country.lastSeen)+' (UTC; approximate country location)';
+      title.textContent=displayName+': recorded page views (approximate location)';
       marker.append(title);
       for(const [radius,style] of [[9,'atlas-marker-halo'],[4.5,'atlas-marker']]){
         const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -88,20 +89,18 @@
   const status = document.getElementById('atlas-status');
   const names = typeof Intl.DisplayNames === 'function' ? new Intl.DisplayNames(['en'], {type:'region'}) : null;
   const show = async stats => {
-    if (!atlas || !Number.isSafeInteger(stats.pageViews) || stats.pageViews < 0 || !Number.isSafeInteger(stats.countries) || stats.countries < 0 || !Array.isArray(stats.recentCountries)) throw Error('Invalid visitor statistics');
+    if (!atlas || !Number.isSafeInteger(stats.pageViews) || stats.pageViews < 0 || !Number.isSafeInteger(stats.countries) || stats.countries < 0 || !Array.isArray(stats.countryVisits) || !Array.isArray(stats.recentCountries)) throw Error('Invalid visitor statistics');
     atlas.querySelectorAll('[data-atlas-stat]').forEach(node => {node.textContent=stats[node.dataset.atlasStat].toLocaleString('en-US');});
-    await paintCountries(stats.recentCountries);
+    await paintCountries(stats.countryVisits);
     const list = document.getElementById('atlas-countries');
     list.replaceChildren();
     for (const country of stats.recentCountries.slice(0,5)) {
       if (!/^[A-Z]{2}$/.test(country.code) || !/^\d{4}-\d{2}-\d{2}$/.test(country.lastSeen)) continue;
-      const item=document.createElement('li'), label=document.createElement('span'), date=document.createElement('time');
-      label.textContent=names ? names.of(country.code) : country.code;date.dateTime=country.lastSeen;date.textContent=seenDate(country.lastSeen);item.append(label,date);list.append(item);
+      const item=document.createElement('li'), label=document.createElement('span');
+      label.textContent=names ? names.of(country.code) : country.code;item.append(label);list.append(item);
     }
-    if (!list.children.length) {const item=document.createElement('li');item.textContent='No countries seen in the last 7 UTC days.';list.append(item);}
+    if (!list.children.length) {const item=document.createElement('li');item.textContent='No recent countries.';list.append(item);}
     status.textContent='Live';status.classList.add('is-live');
-    const updated=document.getElementById('atlas-updated');updated.dateTime=stats.generatedAt;
-    updated.textContent='Countries: past 7 UTC days · Updated '+new Date(stats.generatedAt).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Singapore'})+' SGT';
   };
   if(atlas)paintCountries([]).catch(()=>{atlas.querySelector('.atlas-map').textContent='Map unavailable.';});
   fetch(new URL('../data/atlas-config.json',base)).then(r=>{if(!r.ok)throw Error();return r.json();}).then(config=>{
